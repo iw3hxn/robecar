@@ -47,4 +47,6 @@ class EventPhoto(models.Model):
     active = fields.Boolean('Active', default=True)
 
     def unlink(self):
+        if self._context.get("force_unlink"):
+            return super().unlink()
         self.active = False

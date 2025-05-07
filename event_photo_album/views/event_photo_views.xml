@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <form edit="0" create="0" duplicate="0" >
                 <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
                     <field name="image" widget="image"/>
                     <group>
                         <field name="name"/>
@@ -32,6 +33,7 @@
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
                             <div class="o_kanban_image_fill_left">
                                 <field name="image" widget="image" options="{'size': false, 'preview_image': 'image'}" class="o_kanban_image_full"/>
                             </div>
@@ -58,6 +60,8 @@
                 <field name="name"/>
                 <field name="photographer_name"/>
                 <filter string="My Photos" name="my_photos" domain="[('create_uid', '=', uid)]"/>
+                <separator/>
+                <filter string="All" name="all" domain="['|', ('active', '=', False), ('active', '=', True)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Photographer" name="photographer" context="{'group_by': 'photographer_name'}"/>
                     <filter string="Creation Date" name="create_date" context="{'group_by': 'create_date:month'}"/>

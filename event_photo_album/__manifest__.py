@@ -10,7 +10,7 @@
     """,
     'version': '18.0.1.0.0',
     'category': 'Website/Website',
-    'author': 'Your Company',
+    'author': 'Carlo Vettore,',
     'website': 'https://www.consulenzaodoo.it',
     'license': 'LGPL-3',
 
