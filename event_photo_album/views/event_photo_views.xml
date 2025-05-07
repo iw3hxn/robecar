@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Form -->
+    <record id="event_photo_view_form" model="ir.ui.view">
+        <field name="name">event.photo.form</field>
+        <field name="model">event.photo</field>
+        <field name="arch" type="xml">
+            <form edit="0" create="0" duplicate="0" >
+                <sheet>
+                    <field name="image" widget="image"/>
+                    <group>
+                        <field name="name"/>
+                        <field name="photographer_name"/>
+                        <field name="create_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Kanban -->
+    <record id="event_photo_view_kanban" model="ir.ui.view">
+        <field name="name">event.photo.kanban</field>
+        <field name="model">event.photo</field>
+        <field name="arch" type="xml">
+            <kanban class="o_event_photo_kanban">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="photographer_name"/>
+                <field name="image"/>
+                <field name="create_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image_fill_left">
+                                <field name="image" widget="image" options="{'size': false, 'preview_image': 'image'}" class="o_kanban_image_full"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <div class="text-muted">
+                                    <field name="photographer_name"/>
+                                </div>
+                                <div class="text-muted">
+                                    <field name="create_date"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- Vista Search -->
+    <record id="event_photo_view_search" model="ir.ui.view">
+        <field name="name">event.photo.search</field>
+        <field name="model">event.photo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="photographer_name"/>
+                <filter string="My Photos" name="my_photos" domain="[('create_uid', '=', uid)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Photographer" name="photographer" context="{'group_by': 'photographer_name'}"/>
+                    <filter string="Creation Date" name="create_date" context="{'group_by': 'create_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_event_photo" model="ir.actions.act_window">
+        <field name="name">Event Photos</field>
+        <field name="res_model">event.photo</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No photos found
+            </p>
+            <p>
+                Add photos to your event by uploading them through the event page.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_event_photo"
+              name="Photos"
+              parent="event.event_main_menu"
+              action="action_event_photo"
+              sequence="20"/>
+</odoo>

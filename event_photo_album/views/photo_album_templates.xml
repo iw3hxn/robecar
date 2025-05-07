@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--  Meta tag per prevenire l'indicizzazione  -->
+        <template id="photo_album_meta" inherit_id="website.layout" name="No Index Meta Tag">
+            <xpath expr="//head" position="inside">
+                <meta name="robots" content="noindex, nofollow"/>
+            </xpath>
+        </template>
+
+        <!--  Template principale per l'album fotografico  -->
+        <template id="album_page" name="Photo Album">
+            <t t-call="website.layout">
+                <div class="container py-5">
+                    <!--  Header Section  -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h1 class="h2 mb-0">Album Fotografico</h1>
+                            <p class="text-muted">Condividi e visualizza le tue foto</p>
+                        </div>
+                    </div>
+
+                    <!--  Alert Messages  -->
+                    <div t-if="error or success" class="row mb-4">
+                        <div class="col-12">
+                            <div t-if="error" class="alert alert-danger" role="alert">
+                                <t t-if="error == 'no_file'">Seleziona un file da caricare.</t>
+                                <t t-elif="error == 'invalid_format'">Formato file non supportato. Usa PNG, JPG o GIF.</t>
+                                <t t-elif="error == 'file_too_large'">Il file è troppo grande. Dimensione massima: 10MB.</t>
+                                <t t-else="">Si è verificato un errore durante il caricamento.</t>
+                            </div>
+                            <div t-if="success" class="alert alert-success" role="alert">
+                                Foto caricata con successo!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  Upload Section  -->
+                    <div class="row mb-5">
+                        <div class="col-12 col-md-8 col-lg-6 mx-auto">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <form action="/event/photo/upload" method="post" enctype="multipart/form-data" class="js_photo_upload">
+                                        <input
+                                                type="hidden"
+                                                name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <!--  Drop zone per upload  -->
+                                        <div class="form-group">
+                                            <div class="custom-file-upload border rounded p-4 text-center drop-zone">
+                                                <input type="file" name="photos[]" id="photo_upload" accept="image/*" required="1" class="d-none" multiple="true"/>
+                                                <label for="photo_upload" class="mb-0 cursor-pointer">
+                                                    <i class="fa fa-cloud-upload fa-2x text-primary"/>
+                                                    <p class="mt-2 mb-0">Clicca o trascina qui le tue foto</p>
+                                                    <small class="text-muted d-block mt-2">Puoi selezionare più foto contemporaneamente</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!--  Preview container for multiple images  -->
+                                        <div class="preview-container d-none mt-3">
+                                            <h6 class="mb-3">Anteprime</h6>
+                                            <div class="preview-images row g-2">
+                                                <!-- Le anteprime verranno inserite qui dinamicamente via JavaScript -->
+                                            </div>
+                                        </div>
+                                        <!--  Error container  -->
+                                        <div class="upload-error alert alert-danger d-none mt-3"/>
+                                        <div class="form-group mt-3">
+                                            <input type="text" name="photographer_name" class="form-control" placeholder="Il tuo nome (opzionale)"/>
+                                        </div>
+                                        <!-- Contatore file -->
+                                        <div class="selected-files-count mb-3 d-none">
+                                            File selezionati: <span class="counter">0</span>
+                                        </div>
+
+                                        <!-- Progress bar -->
+                                        <div class="progress upload-progress d-none mb-3">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%"
+                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100 mt-3 d-none loading-state" >
+                                            <i class="fa fa-upload me-2"/>
+                                            Carica Foto
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Section -->
+                    <div class="row g-3">
+                        <t t-foreach="photos" t-as="photo">
+                            <div class="col-6 col-sm-4 col-md-3">
+                                <div class="card h-100">
+                                    <img t-att-src="'/web/image/event.photo/%s/image_thumbnail' % photo.id"
+                                         t-att-data-photo-id="photo.id"
+                                         class="card-img-top cursor-pointer"
+                                         style="object-fit: cover; height: 150px;"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+
+
+
+                    <!--  Empty state  -->
+                    <div t-if="not photos" class="text-center py-5">
+                        <i class="fa fa-image fa-3x text-muted mb-3"/>
+                        <p class="text-muted">Non ci sono ancora foto in questo album</p>
+                    </div>
+                </div>
+
+                <!-- Assets -->
+                <t t-call-assets="web.assets_common" t-js="false"/>
+                <t t-call-assets="web.assets_frontend" t-js="false"/>
+
+                <!-- Custom CSS -->
+                <style>
+                    .custom-file-upload {
+                        transition: all 0.3s ease;
+                    }
+                    .custom-file-upload:hover {
+                        background-color: rgba(0,0,0,0.05);
+                    }
+                    .cursor-pointer {
+                        cursor: pointer;
+                    }
+                    .transition-300 {
+                        transition: all 0.3s ease;
+                    }
+                    .hover-shadow:hover {
+                        transform: translateY(-3px);
+                    }
+                </style>
+            </t>
+        </template>
+
+
+
+    </data>
+</odoo>

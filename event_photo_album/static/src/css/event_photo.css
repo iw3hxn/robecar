@@ -1,0 +1,56 @@
+/* Definizione delle variabili personalizzate */
+:root {
+    --event-photo-height: 240px;
+    --event-photo-padding: 1rem;
+    --event-photo-bg-opacity: 0.9;
+}
+
+/*!* Card principale *!*/
+/*.o_event_photo_kanban {*/
+/*    height: var(--event-photo-height);*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    transition: transform 0.3s ease;*/
+/*}*/
+
+/*!* Contenitore immagine *!*/
+/*.o_event_photo_kanban .o_kanban_image_fill_left {*/
+/*    height: 100%;*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    -webkit-background-size: cover;*/
+/*    -moz-background-size: cover;*/
+/*    -o-background-size: cover;*/
+/*    will-change: transform;*/
+/*    transform: translateZ(0);*/
+/*}*/
+
+/*!* Dettagli della card *!*/
+/*.o_event_photo_kanban .oe_kanban_details {*/
+/*    padding: var(--event-photo-padding);*/
+/*    background-color: rgba(255, 255, 255, var(--event-photo-bg-opacity));*/
+/*    backdrop-filter: blur(5px);*/
+/*    -webkit-backdrop-filter: blur(5px);*/
+/*}*/
+
+/* Media queries per la responsività */
+@media screen and (max-width: 768px) {
+    .o_event_photo_kanban {
+        height: calc(var(--event-photo-height) * 0.8);
+    }
+}
+
+/* Animazioni e stati hover */
+.o_event_photo_kanban:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Fallback per browser che non supportano grid */
+@supports not (display: grid) {
+    .o_event_photo_kanban {
+        float: left;
+        width: calc(33.333% - 20px);
+        margin: 10px;
+    }
+}
