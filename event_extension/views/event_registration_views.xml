@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Modifica della vista ad albero -->
+    <record id="view_event_registration_list_inherit" model="ir.ui.view">
+        <field name="name">event.registration.list.inherit</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_tree"/>
+        <field name="arch" type="xml">
+            <field name="create_date" position="after">
+                <field name="position_id" optional="show"/>
+            </field>
+            <field name="event_ticket_id" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Modifica delle opzioni di ricerca -->
+    <record id="view_event_registration_search_inherit" model="ir.ui.view">
+        <field name="name">event.registration.search.inherit</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_registration_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="Position" name="group_by_position" context="{'group_by': 'position_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

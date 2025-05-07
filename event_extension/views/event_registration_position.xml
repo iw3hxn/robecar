@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Lista per Event Registration Position -->
+    <record id="view_event_registration_position_list" model="ir.ui.view">
+        <field name="name">event.registration.position.list</field>
+        <field name="model">event.registration.position</field>
+        <field name="arch" type="xml">
+            <list string="Event Registration Positions" editable="top">
+                <field name="sequence" widget="handle" />
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>
