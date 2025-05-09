@@ -20,30 +20,43 @@
                     <t t-set="table_name" t-value="position[0]"/>
                     <t t-set="registrations" t-value="position[1]"/>
                     <div class="col-7">
+                        <h1>
                         <div t-out="table_name.display_name or ''"/>
+                        </h1>
                     </div>
-                    <table class="table mt-3" style="page-break-after:always;">
+                    <table class="table table-bordered" style="page-break-after:always;">
                         <thead>
                             <tr class="text-start">
-                                <th>Name</th>
+                                <th>N.</th>
+                                <th>Nome</th>
                                 <!-- Add dynamic question columns -->
-                                <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])" t-as="question">
+                                <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
+                                   t-as="question">
                                     <th t-out="question.title"/>
                                 </t>
                             </tr>
                         </thead>
                         <tbody>
+                            <t t-set="table_count" t-value="1"/>
+
                             <tr t-foreach="registrations" t-as="registration">
+                                <td>
+                                    <t t-esc="table_count"/>
+                                </td>
+
                                 <td><t t-out="registration.name"/></td>
                                 <!-- Add dynamic answer columns -->
-                                <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])" t-as="question">
+                                <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
+                                   t-as="question">
                                     <td>
-                                        <t t-set="answer" t-value="registration.registration_answer_ids.filtered(lambda a: a.question_id == question)"/>
+                                        <t t-set="answer"
+                                           t-value="registration.registration_answer_ids.filtered(lambda a: a.question_id == question)"/>
                                         <t t-if="answer">
                                             <t t-out="answer.display_name"/>
                                         </t>
                                     </td>
                                 </t>
+                                <t t-set="table_count" t-value="table_count + 1"/>
 
                             </tr>
                         </tbody>
