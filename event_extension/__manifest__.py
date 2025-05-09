@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
         'views/event_registration_position.xml',
         'views/event_registration_views.xml',
+        'views/event_views.xml',
         'data/menu_views.xml',
         'report/event_registration_report.xml'
     ],
