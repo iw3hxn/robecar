@@ -17,4 +17,4 @@ class EventRegistration(models.Model):
 
     @api.model
     def _read_group_position_id(self, stages, domain):
-        return stages.search([])
+        return stages.search([('event_id', 'in', self.env.context.get('active_ids', []))])

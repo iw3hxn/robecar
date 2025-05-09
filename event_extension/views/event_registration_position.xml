@@ -5,10 +5,13 @@
         <field name="name">event.registration.position.list</field>
         <field name="model">event.registration.position</field>
         <field name="arch" type="xml">
-            <list string="Event Registration Positions" editable="top">
+            <list string="Event Registration Positions" editable="bottom" multi_edit="1">
+                <field name="event_id" options="{'no_open': True, 'no_quick_create': True}"/>
                 <field name="sequence" widget="handle" />
                 <field name="name"/>
                 <field name="description"/>
+                <field name="registration_count" />
+                <field name="max_registration_count" />
             </list>
         </field>
     </record>
