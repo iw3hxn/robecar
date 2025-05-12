@@ -5,6 +5,7 @@
         <field name="type">qweb</field>
         <field name="arch" type="xml">
             <t t-name="event.attendee_list">
+                <t t-set="global_count" t-value="1"/>
                 <h1>Attendee list</h1>
                 <div class="row">
                     <div class="col-7">
@@ -21,34 +22,38 @@
                     <t t-set="registrations" t-value="position[1]"/>
                     <div class="col-7">
                         <h1>
-                        <div t-out="table_name.display_name or ''"/>
+                            <div t-out="table_name.display_name or ''"/>
                         </h1>
+                        <t t-if="table_name.description">
+                            <h3>
+                                <t t-out="table_name.description"/>
+                            </h3>
+
+                        </t>
+
                     </div>
-                    <table class="table table-bordered" style="page-break-after:always;">
+
+                    <table class="table table-bordered border-dark" style="page-break-after:always;">
                         <thead>
-                            <tr class="text-start">
-                                <th>N.</th>
-                                <th>Nome</th>
-                                <!-- Add dynamic question columns -->
+                            <tr class="text-start fs-5 fw-bold">
+                                <th class="border border-dark">#</th>
+                                <th class="border border-dark">Name</th>
                                 <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
                                    t-as="question">
-                                    <th t-out="question.title"/>
+                                    <th class="border border-dark" t-out="question.title"/>
                                 </t>
                             </tr>
                         </thead>
                         <tbody>
                             <t t-set="table_count" t-value="1"/>
-
                             <tr t-foreach="registrations" t-as="registration">
-                                <td>
-                                    <t t-esc="table_count"/>
+                                <td class="border border-dark">
+                                    <t t-esc="global_count"/>/<t t-esc="table_count"/>
                                 </td>
-
-                                <td><t t-out="registration.name"/></td>
-                                <!-- Add dynamic answer columns -->
+                                <td class="border border-dark"><t t-out="registration.name"/></td>
                                 <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
                                    t-as="question">
-                                    <td>
+                                    <td class="border border-dark">
                                         <t t-set="answer"
                                            t-value="registration.registration_answer_ids.filtered(lambda a: a.question_id == question)"/>
                                         <t t-if="answer">
@@ -57,7 +62,7 @@
                                     </td>
                                 </t>
                                 <t t-set="table_count" t-value="table_count + 1"/>
-
+                                <t t-set="global_count" t-value="global_count + 1"/>
                             </tr>
                         </tbody>
                     </table>
