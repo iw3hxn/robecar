@@ -11,7 +11,7 @@ class EventRegistrationPosition(models.Model):
         string='Position',
         required=True
     )
-    description = fields.Text(string='Description')
+    description = fields.Html(string='Description')
     sequence = fields.Integer(string='Sequence')
     event_id = fields.Many2one(
         'event.event',

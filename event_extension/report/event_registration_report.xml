@@ -20,18 +20,17 @@
                 <tr t-foreach="attendees.grouped('position_id').items()" t-as="position">
                     <t t-set="table_name" t-value="position[0]"/>
                     <t t-set="registrations" t-value="position[1]"/>
-                    <div class="col-7">
-                        <h1>
-                            <div t-out="table_name.display_name or ''"/>
-                        </h1>
-                        <t t-if="table_name.description">
-                            <h3>
-                                <t t-out="table_name.description"/>
-                            </h3>
 
-                        </t>
+                    <h1>
+                        <div t-out="table_name.display_name or ''"/>
+                    </h1>
+                    <t t-if="table_name.description">
 
-                    </div>
+                        <t t-out="table_name.description"/>
+
+
+                    </t>
+
 
                     <table class="table table-bordered border-dark" style="page-break-after:always;">
                         <thead>
