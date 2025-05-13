@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Event Registration Extension',
-    'version': '18.0.0.2.1',
+    'version': '18.0.0.3.0',
+    'summary': 'Event Registration Extension',
     'author': 'Carlo Vettore',
     'category': 'Events',
     'depends': ['event'],

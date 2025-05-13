@@ -5,15 +5,56 @@
         <field name="name">event.registration.position.list</field>
         <field name="model">event.registration.position</field>
         <field name="arch" type="xml">
-            <list string="Event Registration Positions" editable="bottom" multi_edit="1">
+            <list string="Event Registration Positions" multi_edit="1">
                 <field name="event_id" options="{'no_open': True, 'no_quick_create': True}"/>
-                <field name="sequence" widget="handle" />
+                <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="description"/>
-                <field name="registration_count" />
-                <field name="max_registration_count" />
+                <field name="registration_count"/>
+                <field name="max_registration_count"/>
             </list>
         </field>
     </record>
 
+
+    <record id="view_event_registration_position_form" model="ir.ui.view">
+        <field name="name">event.registration.position.form</field>
+        <field name="model">event.registration.position</field>
+        <field name="arch" type="xml">
+            <form string="Event Registration Position">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Position Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="event_id" options="{'no_open': True, 'no_quick_create': True}"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="registration_count"/>
+                            <field name="max_registration_count"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" nolabel="1"/>
+                        </page>
+                        <page string="Registrations" name="registrations">
+                            <field name="registration_ids" readonly="1">
+                                <tree>
+                                    <field name="partner_id"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
 </odoo>

@@ -23,6 +23,12 @@ class EventRegistrationPosition(models.Model):
     )
     max_registration_count = fields.Integer()
 
+    registration_ids = fields.One2many(
+        'event.registration',
+        'position_id',
+        string='Registrations'
+    )
+
     @api.depends('event_id')
     def _compute_registration_count(self):
         registration_data = self.env['event.registration']._read_group(
