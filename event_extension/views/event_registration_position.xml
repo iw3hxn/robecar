@@ -44,12 +44,7 @@
                         </page>
                         <page string="Registrations" name="registrations">
                             <field name="registration_ids" readonly="1">
-                                <tree>
-                                    <field name="partner_id"/>
-                                    <field name="email"/>
-                                    <field name="phone"/>
-                                    <field name="state"/>
-                                </tree>
+
                             </field>
                         </page>
                     </notebook>

@@ -9,6 +9,9 @@
             <field name="create_date" position="after">
                 <field name="position_id" optional="show"/>
             </field>
+            <field name="name" position="after">
+                <field name="tableau_mariage_name" />
+            </field>
             <field name="event_ticket_id" position="attributes">
                 <attribute name="optional">hide</attribute>
             </field>

@@ -49,7 +49,7 @@
                                 <td class="border border-dark">
                                     <t t-esc="global_count"/>/<t t-esc="table_count"/>
                                 </td>
-                                <td class="border border-dark"><t t-out="registration.name"/></td>
+                                <td class="border border-dark"><t t-out="registration.display_name"/></td>
                                 <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
                                    t-as="question">
                                     <td class="border border-dark">
