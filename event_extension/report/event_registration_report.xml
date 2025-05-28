@@ -36,7 +36,9 @@
                         <thead>
                             <tr class="text-start fs-5 fw-bold">
 <!--                                <th class="border border-dark">#</th>-->
-                                <th class="border border-dark">Nome</th>
+
+                                <th class="border border-dark"><div t-out="table_name.display_name or ''"/></th>
+
                                 <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
                                    t-as="question">
                                     <th class="border border-dark" t-out="question.title"/>
