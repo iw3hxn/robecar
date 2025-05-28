@@ -49,14 +49,14 @@
 <!--                                <td class="border border-dark">-->
 <!--                                    <t t-esc="global_count"/>/<t t-esc="table_count"/>-->
 <!--                                </td>-->
-                                <td class="border border-dark"><t t-out="registration.display_name"/></td>
+                                <td class="border border-dark"><t t-out="registration.tableau_mariage_name"/></td>
                                 <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
                                    t-as="question">
                                     <td class="border border-dark">
                                         <t t-set="answer"
                                            t-value="registration.registration_answer_ids.filtered(lambda a: a.question_id == question)"/>
                                         <t t-if="answer">
-                                            <t t-out="answer.tableau_mariage_name"/>
+                                            <t t-out="answer.display_name"/>
                                         </t>
                                     </td>
                                 </t>
