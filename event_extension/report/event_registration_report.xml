@@ -7,16 +7,16 @@
             <t t-name="event.attendee_list">
                 <t t-set="global_count" t-value="1"/>
                 <h1>Attendee list</h1>
-                <div class="row">
-                    <div class="col-7">
-                        <div t-out="event.name"/>
-                    </div>
-                    <div class="col-5">
-                        <span t-out="event.date_begin_located"/>
-                        <i class="fa fa-arrow-right"/>
-                        <span t-out="event.date_end_located"/>
-                    </div>
-                </div>
+<!--                <div class="row">-->
+<!--                    <div class="col-7">-->
+<!--                        <div t-out="event.name"/>-->
+<!--                    </div>-->
+<!--                    <div class="col-5">-->
+<!--                        <span t-out="event.date_begin_located"/>-->
+<!--                        <i class="fa fa-arrow-right"/>-->
+<!--                        <span t-out="event.date_end_located"/>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <tr t-foreach="attendees.grouped('position_id').items()" t-as="position">
                     <t t-set="table_name" t-value="position[0]"/>
                     <t t-set="registrations" t-value="position[1]"/>
