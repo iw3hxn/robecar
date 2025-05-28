@@ -35,8 +35,8 @@
                     <table class="table table-bordered border-dark" style="page-break-after:always;">
                         <thead>
                             <tr class="text-start fs-5 fw-bold">
-                                <th class="border border-dark">#</th>
-                                <th class="border border-dark">Name</th>
+<!--                                <th class="border border-dark">#</th>-->
+                                <th class="border border-dark">Nome</th>
                                 <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
                                    t-as="question">
                                     <th class="border border-dark" t-out="question.title"/>
@@ -46,9 +46,9 @@
                         <tbody>
                             <t t-set="table_count" t-value="1"/>
                             <tr t-foreach="registrations" t-as="registration">
-                                <td class="border border-dark">
-                                    <t t-esc="global_count"/>/<t t-esc="table_count"/>
-                                </td>
+<!--                                <td class="border border-dark">-->
+<!--                                    <t t-esc="global_count"/>/<t t-esc="table_count"/>-->
+<!--                                </td>-->
                                 <td class="border border-dark"><t t-out="registration.display_name"/></td>
                                 <t t-foreach="event.question_ids.filtered_domain([('print_question', '=', True)])"
                                    t-as="question">
@@ -56,7 +56,7 @@
                                         <t t-set="answer"
                                            t-value="registration.registration_answer_ids.filtered(lambda a: a.question_id == question)"/>
                                         <t t-if="answer">
-                                            <t t-out="answer.display_name"/>
+                                            <t t-out="answer.tableau_mariage_name"/>
                                         </t>
                                     </td>
                                 </t>
